@@ -13,7 +13,7 @@ pipeline {
     environment {
         IMAGE_NAME = "siddhdocker/bankapp"
         TAG = "${params.DOCKER_TAG}"  // The image tag now comes from the parameter
-        #SCANNER_HOME = tool name: 'sonar-scanner'
+        //SCANNER_HOME = tool name: 'sonar-scanner'
         KUBE_NAMESPACE = 'webapps'
         }
 
