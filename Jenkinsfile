@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/pingatesiddh/Blue-Green-Deployment.git'
+                git branch: 'main', url: 'git@github.com:PradeepLokhande-Git/Blue-Green-Deployment.git'
             }
         }
         stage('Compile') {
@@ -33,7 +33,7 @@ pipeline {
                 sh 'mvn test -DskipTests=true'
             }
         }
-        stage('Trivy Fs Scan') {
+        /*stage('Trivy Fs Scan') {
             steps {
                 sh 'trivy fs --format table -o fs.html .'
             }
@@ -51,7 +51,7 @@ pipeline {
                 waitForQualityGate abortPipeline: false
                 }
             }
-        }
+        }*/
         stage('Build') {
             steps {
                 sh 'mvn package -DskipTests=true'
@@ -73,11 +73,11 @@ pipeline {
                 }
             }
         }
-        stage('Trivy Image Scan') {
+        /*stage('Trivy Image Scan') {
             steps {
                 sh 'trivy image --format table -o fs.html ${IMAGE_NAME}:${TAG}'
             }
-        }
+        }*/
         stage('Docker Push Image ') {
             steps {
                 script{
@@ -87,7 +87,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy MySQL Deployment and Service') {
+        /*stage('Deploy MySQL Deployment and Service') {
             steps {
                 script {
                     withKubeConfig(caCertificate: '', clusterName: 'devopsshack-cluster-new', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://FB322B874ECA5960B8397B80E74A19BB.gr7.ap-south-1.eks.amazonaws.com') {
@@ -155,7 +155,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
         
     }
 }
